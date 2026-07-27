@@ -21,13 +21,8 @@ export default async function handler(req, res) {
         const order = body.data?.order;
 
         if (
-
-            event === "PAYMENT_SUCCESS_WEBHOOK"
-
-            ||
-
+            body.type === "PAYMENT_SUCCESS_WEBHOOK" &&
             payment?.payment_status === "SUCCESS"
-
         ) {
 
             console.log("====================================");
