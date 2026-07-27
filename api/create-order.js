@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
         order_id: orderId,
 
-        order_amount: 229,
+        order_amount: 2,
 
         order_currency: "INR",
 
