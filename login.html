@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | SureSolutions10X</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+.card{
+
+width:420px;
+background:#ffffff;
+border-radius:20px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+}
+
+.logo{
+
+font-size:30px;
+font-weight:700;
+text-align:center;
+margin-bottom:10px;
+color:#0f172a;
+
+}
+
+.subtitle{
+
+text-align:center;
+color:#555;
+margin-bottom:35px;
+
+}
+
+label{
+
+font-size:14px;
+font-weight:500;
+display:block;
+margin-bottom:8px;
+
+}
+
+input{
+
+width:100%;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:15px;
+margin-bottom:20px;
+outline:none;
+
+}
+
+input:focus{
+
+border:1px solid #2563eb;
+
+}
+
+button{
+
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#1d4ed8;
+
+}
+
+.message{
+
+margin-top:18px;
+text-align:center;
+font-size:14px;
+color:#444;
+
+}
+
+.back{
+
+display:block;
+margin-top:30px;
+text-align:center;
+text-decoration:none;
+color:#2563eb;
+font-weight:500;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">
+
+SureSolutions10X
+
+</div>
+
+<div class="subtitle">
+
+Login using the email used during purchase.
+
+</div>
+
+<form id="loginForm">
+
+<label>Email Address</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
+
+<button>
+
+Continue
+
+</button>
+
+</form>
+
+<div class="message" id="message"></div>
+
+<a href="index.html" class="back">
+
+← Back to Home
+
+</a>
+
+</div>
+
+<script>
+
+const form=document.getElementById("loginForm");
+
+form.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const email=document.getElementById("email").value;
+
+document.getElementById("message").innerHTML="Checking your account...";
+
+try{
+
+const res=await fetch("/api/login",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({email})
+
+});
+
+const data=await res.json();
+
+if(data.success){
+
+window.location.href="dashboard.html";
+
+}else{
+
+document.getElementById("message").innerHTML=data.message;
+
+}
+
+}catch{
+
+document.getElementById("message").innerHTML="Server unavailable.";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
