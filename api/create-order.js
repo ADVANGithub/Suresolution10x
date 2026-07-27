@@ -51,10 +51,11 @@ export default async function handler(req, res) {
         },
 
         order_meta: {
-
-          return_url:
-            "https://suresolutions10x.vercel.app/success.html?order_id={order_id}"
-
+            return_url:
+                "https://suresolutions10x.vercel.app/success.html?order_id={order_id}",
+        
+            notify_url:
+                "https://suresolutions10x.vercel.app/api/webhook"
         }
 
       })
