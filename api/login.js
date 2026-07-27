@@ -1,3 +1,11 @@
+import jwt from "jsonwebtoken";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
 export default async function handler(req, res) {
 
     if (req.method !== "POST") {
@@ -14,58 +22,53 @@ export default async function handler(req, res) {
         if (!email) {
             return res.status(400).json({
                 success: false,
-                message: "Email is required."
+                message: "Email is required"
             });
         }
 
-        /*
-        STEP 1 (Temporary MVP)
-
-        Replace this later with your database lookup.
-
-        Example:
-        const student = await supabase
+        const { data: student, error } = await supabase
             .from("students")
             .select("*")
-            .eq("email", email)
-            .eq("payment_status","SUCCESS")
+            .eq("email", email.toLowerCase())
+            .eq("payment_status", "SUCCESS")
             .single();
 
-        */
-
-        const allowedEmails = [
-            "ajay@example.com"
-        ];
-
-        if (allowedEmails.includes(email.toLowerCase())) {
-
-            return res.status(200).json({
-
-                success: true,
-
-                message: "Login Successful"
-
+        if (error || !student) {
+            return res.status(401).json({
+                success: false,
+                message: "No active course found."
             });
-
         }
 
-        return res.status(401).json({
+        const token = jwt.sign(
+            {
+                id: student.id,
+                name: student.name,
+                email: student.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "30d"
+            }
+        );
 
-            success: false,
-
-            message:
-                "No paid course found with this email."
-
+        return res.status(200).json({
+            success: true,
+            token,
+            student: {
+                id: student.id,
+                name: student.name,
+                email: student.email
+            }
         });
 
     } catch (err) {
 
+        console.error(err);
+
         return res.status(500).json({
-
             success: false,
-
-            message: "Internal Server Error"
-
+            message: "Server Error"
         });
 
     }
