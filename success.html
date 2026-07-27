@@ -1,1 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Payment Status</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+background:#f5f7fb;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+padding:20px;
+
+}
+
+.card{
+
+width:100%;
+
+max-width:650px;
+
+background:#fff;
+
+border-radius:20px;
+
+padding:40px;
+
+box-shadow:0 15px 50px rgba(0,0,0,.12);
+
+text-align:center;
+
+}
+
+.icon{
+
+font-size:70px;
+
+margin-bottom:20px;
+
+}
+
+.success{
+
+color:#22c55e;
+
+}
+
+.failed{
+
+color:#ef4444;
+
+}
+
+.pending{
+
+color:#f59e0b;
+
+}
+
+h1{
+
+margin-bottom:15px;
+
+font-size:32px;
+
+}
+
+p{
+
+color:#666;
+
+margin-bottom:30px;
+
+}
+
+.details{
+
+text-align:left;
+
+margin-top:30px;
+
+border-top:1px solid #eee;
+
+padding-top:25px;
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.label{
+
+font-weight:600;
+
+}
+
+.value{
+
+color:#555;
+
+}
+
+button{
+
+margin-top:35px;
+
+background:#2563eb;
+
+color:#fff;
+
+border:none;
+
+padding:15px 35px;
+
+border-radius:10px;
+
+font-size:17px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#1d4ed8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div id="statusIcon"
+class="icon">
+
+⏳
+
+</div>
+
+<h1 id="statusTitle">
+
+Verifying Payment...
+
+</h1>
+
+<p id="statusMessage">
+
+Please wait while we verify your payment.
+
+</p>
+
+<div class="details">
+
+<div class="row">
+
+<span class="label">
+
+Order ID
+
+</span>
+
+<span
+id="orderId"
+class="value">
+
+--
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Customer
+
+</span>
+
+<span
+id="customerName"
+class="value">
+
+--
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Email
+
+</span>
+
+<span
+id="customerEmail"
+class="value">
+
+--
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Phone
+
+</span>
+
+<span
+id="customerPhone"
+class="value">
+
+--
+
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+
+Amount
+
+</span>
+
+<span
+id="amount"
+class="value">
+
+₹0
+
+</span>
+
+</div>
+
+</div>
+
+<button
+id="actionButton">
+
+Loading...
+
+</button>
+
+</div>
+
+<script>
+const orderId = new URLSearchParams(window.location.search).get("order_id");
+
+const statusIcon = document.getElementById("statusIcon");
+const statusTitle = document.getElementById("statusTitle");
+const statusMessage = document.getElementById("statusMessage");
+
+const orderIdElement = document.getElementById("orderId");
+const customerName = document.getElementById("customerName");
+const customerEmail = document.getElementById("customerEmail");
+const customerPhone = document.getElementById("customerPhone");
+const amount = document.getElementById("amount");
+
+const actionButton = document.getElementById("actionButton");
+
+async function verifyPayment() {
+
+    if (!orderId) {
+
+        statusIcon.innerHTML = "❌";
+
+        statusIcon.className = "icon failed";
+
+        statusTitle.innerHTML = "Invalid Order";
+
+        statusMessage.innerHTML = "Order ID not found.";
+
+        actionButton.innerHTML = "Go Home";
+
+        actionButton.onclick = () => {
+
+            window.location.href = "/";
+
+        };
+
+        return;
+
+    }
+
+    try {
+
+        const response = await fetch(
+
+            "/api/verify-order?order_id=" + orderId
+
+        );
+
+        const data = await response.json();
+
+        if (!data.success) {
+
+            throw new Error(data.message);
+
+        }
+
+        orderIdElement.innerHTML = data.order_id;
+
+        customerName.innerHTML = data.customer_name;
+
+        customerEmail.innerHTML = data.customer_email;
+
+        customerPhone.innerHTML = data.customer_phone;
+
+        amount.innerHTML = "₹" + data.order_amount;
+
+        if (data.order_status === "PAID") {
+
+            statusIcon.innerHTML = "✅";
+
+            statusIcon.className = "icon success";
+
+            statusTitle.innerHTML = "Payment Successful";
+
+            statusMessage.innerHTML =
+                "Thank you for purchasing Sure Solutions 10X.";
+
+            actionButton.innerHTML = "Access Course";
+
+            actionButton.onclick = () => {
+
+                window.location.href = "/course.html";
+
+            };
+
+        }
+
+        else if (data.order_status === "ACTIVE") {
+
+            statusIcon.innerHTML = "⏳";
+
+            statusIcon.className = "icon pending";
+
+            statusTitle.innerHTML = "Payment Pending";
+
+            statusMessage.innerHTML =
+                "Your payment is still being processed.";
+
+            actionButton.innerHTML = "Refresh";
+
+            actionButton.onclick = () => {
+
+                location.reload();
+
+            };
+
+        }
+
+        else {
+
+            statusIcon.innerHTML = "❌";
+
+            statusIcon.className = "icon failed";
+
+            statusTitle.innerHTML = "Payment Failed";
+
+            statusMessage.innerHTML =
+                "Payment was unsuccessful.";
+
+            actionButton.innerHTML = "Try Again";
+
+            actionButton.onclick = () => {
+
+                window.location.href = "/";
+
+            };
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        statusIcon.innerHTML = "❌";
+
+        statusIcon.className = "icon failed";
+
+        statusTitle.innerHTML = "Verification Failed";
+
+        statusMessage.innerHTML = error.message;
+
+        actionButton.innerHTML = "Go Home";
+
+        actionButton.onclick = () => {
+
+            window.location.href = "/";
+
+        };
+
+    }
+
+}
+
+verifyPayment();
+</script>
+
+</body>
+
+</html>
