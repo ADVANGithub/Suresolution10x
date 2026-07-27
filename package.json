@@ -1,1 +1,18 @@
-
+{
+  "name": "suresolutions10x",
+  "version": "1.0.0",
+  "description": "SureSolutions10X Online Course Platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "cashfree-pg": "^5.0.8",
+    "dotenv": "^17.2.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.5"
+  }
+}
