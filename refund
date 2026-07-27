@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Refund & Cancellation Policy | Sure Solutions 10X</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f7fb;
+margin:0;
+padding:40px;
+line-height:1.8;
+color:#222;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:40px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+margin-bottom:20px;
+}
+
+h2{
+margin-top:35px;
+}
+
+a{
+color:#2563eb;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Refund & Cancellation Policy</h1>
+
+<p>
+At Sure Solutions 10X, we strive to provide high-quality digital educational content. Since our products are digital in nature and are delivered instantly after successful payment, please read our refund policy carefully before making a purchase.
+</p>
+
+<h2>Digital Products</h2>
+
+<p>
+Our products include online video courses, PDFs, notes, templates, AI resources, and other downloadable educational materials. These products are delivered electronically and do not involve physical shipping.
+</p>
+
+<h2>Refund Eligibility</h2>
+
+<ul>
+
+<li>Refund requests will only be considered in exceptional cases where access to the purchased digital content has not been provided due to a verified technical issue.</li>
+
+<li>If course access has already been provided successfully, refunds may not be applicable.</li>
+
+<li>Refund requests must be submitted within 7 days of the payment date along with the order details.</li>
+
+</ul>
+
+<h2>Non-Refundable Situations</h2>
+
+<ul>
+
+<li>Change of mind after purchase.</li>
+
+<li>Lack of usage after successful access has been provided.</li>
+
+<li>Failure to complete the course.</li>
+
+<li>Accidental purchase after successful content delivery.</li>
+
+<li>Unsuitability due to personal preferences.</li>
+
+</ul>
+<h2>Cancellation Policy</h2>
+
+<p>
+Customers may cancel a purchase request before successful payment. Once payment has been completed and digital content has been delivered or course access has been granted, cancellation is generally not possible.
+</p>
+
+<h2>Refund Process</h2>
+
+<p>
+Eligible refund requests will be reviewed by our support team. If approved, the refund will be processed through the original payment method. Depending on your payment provider or bank, the refunded amount may take approximately 5–10 business days to reflect in your account.
+</p>
+
+<h2>Technical Issues</h2>
+
+<p>
+If you experience any issue accessing your purchased course or digital resources, please contact our support team. We will make reasonable efforts to resolve verified technical issues before considering a refund request.
+</p>
+
+<h2>Policy Updates</h2>
+
+<p>
+Sure Solutions 10X reserves the right to modify this Refund & Cancellation Policy at any time. Any updates will become effective immediately after being published on this website.
+</p>
+
+<h2>Contact Us</h2>
+
+<p>
+For refund or cancellation requests, please contact us through our Contact Us page with your Order ID, registered email address, and a detailed description of the issue.
+</p>
+
+<p style="margin-top:40px;">
+<a href="index.html">← Back to Home</a>
+</p>
+
+</div>
+
+</body>
+
+</html>
