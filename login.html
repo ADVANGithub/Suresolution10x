@@ -201,6 +201,17 @@ const data=await res.json();
 
 if(data.success){
 
+    localStorage.setItem("token",data.token);
+
+    localStorage.setItem(
+        "student",
+        JSON.stringify(data.student)
+    );
+
+    window.location.href="dashboard.html";
+
+}
+
 window.location.href="dashboard.html";
 
 }else{
