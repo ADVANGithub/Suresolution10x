@@ -16,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const payNowBtn = document.getElementById("payNow");
 
     const checkoutModal = document.getElementById("checkoutModal");
-
+    
+    console.log("Pay Button:", payNowBtn);
+    console.log("Modal:", checkoutModal);
+    
     const closeModal = document.querySelector(".close-modal");
 
     const continuePayment = document.getElementById("continuePayment");
@@ -35,8 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         payNowBtn.addEventListener("click", function () {
 
+            console.log("BUY NOW CLICKED");
+        
             checkoutModal.style.display = "flex";
-
+        
         });
 
     }
