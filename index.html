@@ -664,7 +664,7 @@
 
                 <button
 				    id="payNow"
-				    onclick="window.location.href='https://payments.cashfree.com/forms/suresolutions10x'">
+				    >
 				    Buy Now
 				</button>
 
@@ -804,6 +804,43 @@
 
     </footer>
 
+	<!-- Checkout Popup -->
+<div id="checkoutModal" class="checkout-modal">
+
+    <div class="checkout-box">
+
+        <span class="close-modal">&times;</span>
+
+        <h2>Complete Your Purchase</h2>
+
+        <p>Please enter your details before payment.</p>
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Full Name"
+        >
+
+        <input
+            type="email"
+            id="customerEmail"
+            placeholder="Email Address"
+        >
+
+        <input
+            type="tel"
+            id="customerPhone"
+            placeholder="Phone Number"
+        >
+
+        <button id="continuePayment">
+            Continue to Payment
+        </button>
+
+    </div>
+
+</div>
+	
 	<script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 	<script src="script.js"></script>
 
