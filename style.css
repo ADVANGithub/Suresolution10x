@@ -739,6 +739,11 @@ section h2{
     cursor:pointer;
 }
 
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
 /* ===========================
    CTA
 =========================== */
